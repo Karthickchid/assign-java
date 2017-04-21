@@ -1,0 +1,262 @@
+1.
+A)
+import java.util.Date;
+
+
+public abstract class Medicine 
+{
+	float price;
+	Date ExpDt;
+	
+	public void getDetails() 
+	{
+		System.out.println("price of medicine : "+price);
+		System.out.println("expiry date of medicine :"+ExpDt);
+				
+	}
+	
+	
+	
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+
+
+	public void setExpDt(Date expDt) {
+		ExpDt = expDt;
+	}
+
+
+
+	public abstract void displayLabel();
+		
+}
+
+B)
+public class Ointment extends Medicine
+{
+
+	@Override
+	public void displayLabel() 
+	{
+		// TODO Auto-generated method stub
+		System.out.println("for external use only");
+	}
+	
+}
+
+C)
+public class Syrup extends Medicine 
+{
+
+	@Override
+	public void displayLabel() 
+	{
+		// TODO Auto-generated method stub
+		System.out.println("keep away from sunlight");
+	}
+	
+}
+
+D)
+public class Tablet extends Medicine 
+{
+
+	@Override
+	public void displayLabel() 
+	{
+		// TODO Auto-generated method stub
+		System.out.println("Store in cool and dry place");
+	}
+	
+}
+
+E)
+
+import java.util.Date;
+import java.util.Random;
+import java.util.Scanner;
+
+
+public class TestMedicine 
+{
+	public static void main(String[] args) 
+	{
+		Medicine[] m=new Medicine[5];
+		Random r=new Random();
+		Scanner p = new Scanner(System.in); 
+		
+		
+		for(int i=1;i<4;i++)
+		{	
+			int rn=r.nextInt(3)+1;
+			
+			if(rn==1)
+			{	
+				Date o = new Date();
+				
+				m[i] = new Tablet();
+				Tablet a = (Tablet) m[i];
+				
+				System.out.println("enter price of medicine");
+				a.setPrice(p.nextFloat());
+				System.out.println("enter expiry date");
+				o.setDate(p.nextInt());
+				o.setDate((p.nextInt()) - 1);
+				o.setDate((p.nextInt()) - 1900);
+				a.setExpDt(o);
+				a.getDetails();
+				a.displayLabel();
+			}
+			if(rn==2)
+			{
+				Date o = new Date();
+				
+				m[i] = new Syrup();
+				Syrup s = (Syrup) m[i];
+				
+
+				System.out.println("enter price of medicine");
+				s.setPrice(p.nextFloat());
+				System.out.println("enter expiry date");
+				o.setDate(p.nextInt());
+				o.setDate((p.nextInt()) - 1);
+				o.setDate((p.nextInt()) - 1900);
+				
+				s.setExpDt(o);
+				s.getDetails();
+				s.displayLabel();
+			}
+			if(rn==3)
+			{	
+				Date o = new Date();
+				
+				m[i] = new Ointment();
+				Ointment l = (Ointment) m[i];
+				
+				System.out.println("enter price of medicine");
+				l.setPrice(p.nextFloat());
+				System.out.println("enter expiry date");
+				o.setDate(p.nextInt());
+				o.setDate((p.nextInt()) - 1);
+				o.setDate((p.nextInt()) - 1900);
+				
+				l.setExpDt(o);
+				l.getDetails();
+				l.displayLabel();
+			}
+		}
+		
+	}
+}
+
+***************************************************************************************************
+2.
+A)
+package com.shape;
+
+public interface Polygon
+{
+	void calcArea();
+	void calcPeri();
+	
+}
+
+B)
+
+package com.shape;
+
+public class Rectangle implements Polygon 
+{
+	float length;
+	float breadth;
+	
+	@Override
+	public void calcArea() 
+	{
+		// TODO Auto-generated method stub
+		float area = length * breadth;
+		System.out.println(" Area of rectangle is :" +area);
+	}
+
+	@Override
+	public void calcPeri() {
+		// TODO Auto-generated method stub
+		float peri = 2 * (length + breadth) ;
+		System.out.println("Perimeter of rectangle is :" +peri);
+	}
+
+	public void setLength(float length) {
+		this.length = length;
+	}
+
+	public void setBreadth(float breadth) {
+		this.breadth = breadth;
+	}
+	
+	}
+
+C)
+package com.shape;
+
+public class Square implements Polygon 
+{
+	float side;
+	
+	
+	@Override
+	public void calcArea() 
+	{
+		// TODO Auto-generated method stub
+		float area = side * side;
+		System.out.println("Area of square is :"+area);
+
+	}
+
+	@Override
+	public void calcPeri() {
+		// TODO Auto-generated method stub
+		float peri = 4 * side;
+		System.out.println(" Perimeter of square is :"+peri);
+	}
+
+	public void setSide(float side) {
+		this.side = side;
+	}
+
+	
+}
+
+D)
+package com.test;
+import java.util.Scanner;
+
+import com.shape.*;
+
+public class Test
+{
+	public static void main(String[] args) 
+	{
+		Scanner s = new Scanner(System.in);
+		
+		Square sq = new Square();
+		Rectangle r = new Rectangle();
+		
+		System.out.println("enter side of square");
+		sq.setSide(s.nextFloat());
+		
+		System.out.println("enter length of rectangle");
+		r.setLength(s.nextFloat());
+		System.out.println("enter breadth of rectangle");
+		r.setBreadth(s.nextFloat());
+		
+		sq.calcArea();
+		sq.calcPeri();
+		r.calcArea();
+		r.calcPeri();
+	}
+	
+}
+
+****************************************************************************************

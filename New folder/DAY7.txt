@@ -1,0 +1,195 @@
+1.
+import java.util.ArrayList;
+import java.util.Iterator;
+
+
+public class Students {
+
+	private ArrayList<String> names = new ArrayList<String>();
+
+	public void setNames(String name) 
+	{
+		names.add(name);
+	}
+
+	public void searchName(String name)
+	{
+
+		if (names.contains(name))
+		{
+			System.out.println("student found");
+		}
+		else 
+			System.out.println("not found");
+	}
+
+	public void serachName(int index) 
+	{
+		System.out.println("student is : "+names.get(index));
+	}
+	
+	public void printNames() 
+	{
+		Iterator i = names.iterator();
+		while(i.hasNext())
+		{
+			System.out.println(i.next());
+		}
+	}
+	
+	public void removeName(String stuName)
+	{
+		names.remove(stuName);
+	}
+}
+---------------------------
+public class ArrayListDemo {
+
+	public static void main(String[] args) {
+		
+		Students s = new Students();
+		
+		s.setNames("shubham");
+		s.setNames("ravina");
+		s.setNames("rohit");
+		
+		
+		s.searchName("sarvesh");
+		s.serachName(1);
+		s.printNames();
+		s.removeName("rohit");
+		s.printNames();
+		
+		
+	}
+}
+**************************************************
+2.
+import java.util.ArrayList;
+import java.util.Iterator;
+
+
+public class Students {
+
+	private ArrayList<String> names = new ArrayList<String>();
+
+	public void setNames(String name) 
+	{
+		names.add(name);
+	}
+
+	public void searchName(String name)
+	{
+
+		if (names.contains(name))
+		{
+			System.out.println("student found");
+		}
+		else 
+			System.out.println("not found");
+	}
+
+	public void serachName(int index) 
+	{
+		System.out.println("student is : "+names.get(index));
+	}
+	
+	public void printNames() 
+	{
+		Iterator i = names.iterator();
+		while(i.hasNext())
+		{
+			System.out.println(i.next());
+		}
+	}
+	
+	public void removeName(String stuName)
+	{
+		names.remove(stuName);
+	}
+}
+-------------------------------------
+3.
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
+
+
+public class Employee{
+
+	HashMap<String, String> empNames = new HashMap<String, String>();
+
+	public void setname() 
+	{
+		Scanner s = new Scanner(System.in);
+		for(int i=1;i<=3;i++)
+		{
+			System.out.println("enter rollno: ");
+			String rn = s.next();
+			System.out.println("enter name for student :");
+			String emp = s.next();
+
+			empNames.put(rn, emp);
+		}
+	}
+
+	public void printName() 
+	{
+		Enumeration e= Collections.enumeration(empNames.keySet());
+		Enumeration e1= Collections.enumeration(empNames.values());
+		
+		while(e.hasMoreElements() && e1.hasMoreElements())
+			
+			System.out.println(e.nextElement()+"   "+e1.nextElement());
+		
+		
+		
+		
+		/*Enumeration e = (Enumeration) empNames.entrySet();
+		while(e.hasMoreElements())
+		{
+			System.out.println(e.nextElement());
+		}*/
+
+	}
+
+	public void getName(String key)
+	{
+		System.out.println("value of key is :"+empNames.get(key));
+	}
+
+	public void printNameKeySet() 
+	{
+		for(String me : empNames.keySet())
+		{
+			System.out.println(empNames.get(me));
+		}
+	}
+	
+	public void printSize() 
+	{
+		System.out.println("size of hashmap map :" +empNames.size());
+	}
+	
+	public void remove(String key) 
+	{
+		empNames.remove(key);
+	}
+
+}
+
+-----------------------------------------------------------------------------
+
+public class TestHashMap {
+
+	public static void main(String[] args) {
+		
+		Employee e = new Employee();
+		e.setname();
+		e.printName();
+	}
+}
+**************************************************

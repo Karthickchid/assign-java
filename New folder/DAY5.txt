@@ -1,0 +1,241 @@
+1.
+package ThreadingDemos;
+
+import java.util.Scanner;
+
+
+public class ArrayException
+
+{
+	public static void main(String[] args) 
+	{
+		int arr[] = new int[10];
+		Scanner s = new Scanner(System.in);
+		System.out.println(" Enter number");
+
+
+		try {
+			for(int i=0; i<10; i++)
+
+			{
+				arr[i] = s.nextInt();
+
+			}
+			System.out.println(" array is"+arr[12]);
+			for(int i=0; i<10; i++)
+			{
+				System.out.println(" array is"+arr[i]);
+			}
+		} catch (ArrayIndexOutOfBoundsException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			System.out.println("error: arrray consists only 10 elements");
+		}
+	}
+
+}
+
+*****************************************************************************
+3.
+package ThreadingDemos;
+
+public class Customer {
+	private String custNo;
+	private String custName;
+	private String category;
+
+	public Customer()
+	{
+
+	}
+
+	public Customer(String custNo, String custName, String category) {
+		super();
+
+		this.custNo = custNo;
+		this.custName = custName;
+		this.category = category;
+
+	}
+
+	public String getCustNo() {
+		return custNo;
+	}
+
+	public String getCustName() {
+		return custName;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCustNo(String custNo) throws InvalidInputException {
+
+		if ( custNo.startsWith("C") || custNo.startsWith("c") )
+		{	
+			this.custNo = custNo;
+		}
+		else
+			throw new InvalidInputException ("invalid custno");
+
+
+	}
+
+	public void setCustName(String custName) throws InvalidInputException {
+
+		if( custName.length() > 3)
+		{
+			this.custName = custName;
+		}
+		else 
+			throw new InvalidInputException("invalid custName");
+
+	}
+
+	public void setCategory(String category) throws InvalidInputException {
+
+		if(category.equals("Platinum") || category.equals("Gold") || category.equals("Silver"))
+		{
+			this.category = category;
+		}	
+		else
+			throw new InvalidInputException("invalid category");
+
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [custNo=" + custNo + ", custName=" + custName
+				+ ", category=" + category + "]";
+	}
+
+
+
+
+}
+----------------------------------------------------
+package ThreadingDemos;
+
+public class InvalidInputException extends Exception {
+
+	public InvalidInputException(String message) {
+		super(message);
+		// TODO Auto-generated constructor stub
+		
+	}
+	
+	
+
+}
+-----------------------------------------------
+package ThreadingDemos;
+
+import java.util.Scanner;
+
+public class TestCustomer {
+
+	public static void main(String[] args) {
+		
+		Customer c = new Customer();
+		Scanner s = new Scanner(System.in);
+		
+		try {
+			System.out.println("enter custno");
+			c.setCustNo(s.next());
+			System.out.println("enter customer name");
+			c.setCustName(s.next());
+			System.out.println("enter category");
+			c.setCategory(s.next());
+			System.out.println(c);
+			
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+	}
+}
+************************************************************************
+package ThreadingDemos;
+
+public class DivideByZeroException extends Exception {
+
+	public DivideByZeroException(String arg0)
+	{
+		super(arg0);
+		// TODO Auto-generated constructor stub.
+		
+		
+	}
+
+}
+******************************
+package ThreadingDemos;
+
+public class Handle
+{
+	private int num;
+	private int den;
+
+	public int Divide() 
+	{
+		int Div= num/den;
+		System.out.println(Div);
+		return Div;
+	
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public void setDen(int den) throws DivideByZeroException {
+		if (den==0)
+		throw new DivideByZeroException("deno should not be zero");
+		this.den = den;
+	}
+
+}
+********************************
+package ThreadingDemos;
+
+
+public class Test 
+{
+	private int n;
+	private boolean flag;
+	public synchronized void put(int n)
+	{
+		if(flag == true)
+			try
+			{
+				wait();
+			} 
+			catch (InterruptedException e) 
+			{
+				e.printStackTrace();
+			}
+		this.n = n;
+		System.out.println("PUT: " + n);
+		flag = true;
+		notify();
+	}
+	
+	public synchronized int get()
+	{
+		if(flag == false)
+			try
+			{
+				wait();
+			} 
+			catch (InterruptedException e) 
+			{
+				e.printStackTrace();
+			}
+		System.out.println("GOT: " + n);
+		flag = false;
+		notify();
+		return n;
+	}
+}
