@@ -1,0 +1,304 @@
+package test;
+
+import java.util.Scanner;
+
+public class University {
+static int count;
+private static professor professor;
+Exam exam;
+
+boolean studentVerificationProcess(Student student){
+	//Validator v;
+	if (Validator.validateStudent(student) )
+	return true;
+	else
+		return false;
+}
+
+
+void writeExamGetResult(Student s,Exam exam){
+	 System.out.println(s.getName()+" your % is "+exam.getMarks());
+}
+
+void studentAdmission(Student student , Course course){
+	System.out.println(student.getName()+" register for "+course.getName());
+	count++;
+	System.out.println("Your Student id = : "+count);
+	
+}
+
+void studentCertificationProcess(Student student,Course course){
+	System.out.println(student.getName()+" you are "+course.getName()+" Professional Certified..");
+	
+}
+
+public static void main(String[] args) {
+	Scanner sc=new Scanner(System.in);
+	University u1=new University();
+	Student s1=new Student();
+	professor  p1=new professor();
+	Course c1=new Course();
+	Exam e1=new Exam(10,"java",90);
+	System.out.println("Enter Name of student");
+	s1.setName(sc.next());
+	System.out.println("Enter age of student");
+	s1.setAge(sc.nextInt());	
+		System.out.println("Enter Prev marks of student");
+		s1.setPreviousMarks(sc.nextInt());
+		 System.out.println("enter course Id");
+		 c1.setId(sc.nextInt());
+		 System.out.println("enter course Name");
+		 c1.setName(sc.next());
+		 System.out.println("enter course Duration");
+		 c1.setDuration(sc.nextInt());
+		System.out.println("Enter Professor Name");
+		p1.setName(sc.next());
+		p1.setStudent(s1);
+	 
+	 u1.studentVerificationProcess(s1);
+	 u1.studentAdmission(s1, c1);
+	p1.teaches(c1);
+	p1.conductingExam(e1);
+	System.out.println("Marks"+p1.evaluatingPaper(e1));
+	if(e1.getMarks()>70){
+	u1.writeExamGetResult(s1, e1);
+	u1.studentCertificationProcess(s1, c1);
+	}
+	else
+	{
+		System.out.println(s1.getName()+" your % marks is 70 below" );
+		
+	}
+	
+}
+
+
+}
+
+
+
+
+
+
+
+package test;
+
+public class professor {
+	private String name;
+	private Student student;
+	
+	void teaches(Course course){
+		System.out.println(name+" is teaching "+course.getName()+"  to "+student.getName());
+	}
+	void conductingExam(Exam exam){
+		System.out.println(name+" is Conducting "+exam.getName()+"   Exam to "+student.getName());
+	}
+	
+	public professor() {
+
+	}
+	
+	public professor(String name, Student student) {
+		super();
+		this.name = name;
+		this.student = student;
+		
+	}
+	
+	int evaluatingPaper(Exam exam){
+		System.out.println(this.getName()+" is evaluating "+this.getStudent().getName()+exam.getName()+" paper");
+		exam.setMarks(90);
+		return exam.getMarks();
+		
+	}
+	
+	public Student getStudent() {
+		return student;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+}
+
+
+
+
+
+
+package test;
+
+public class Exam {
+	private int id;
+	private String name;
+	private int marks;
+
+	public Exam() {
+
+	}
+	
+	public Exam(int id, String name, int marks) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.marks = marks;
+	
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public int getMarks() {
+		return marks;
+	}
+	
+	public void setMarks(int marks) {
+		this.marks = marks;
+	}
+
+
+}
+
+
+
+
+
+
+package test;
+
+public class Student {
+	private int age;
+	private String name;
+	private int previousMarks;
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getPreviousMarks() {
+		return previousMarks;
+	}
+	public void setPreviousMarks(int previousMarks) {
+		this.previousMarks = previousMarks;
+	}
+	public Student() {
+	}
+	public Student(int age, String name, int previousMarks) {
+		super();
+		this.age = age;
+		this.name = name;
+		this.previousMarks = previousMarks;
+		}
+
+
+
+}
+
+
+
+
+
+
+package test;
+
+public class Course {
+	private int id;
+	private String name;
+	private int duration;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public Course() {
+	}
+	
+	public Course(int id, String name, int duration) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.duration = duration;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public int getDuration() {
+		return duration;
+	}
+	
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+}
+
+
+
+
+
+package test;
+
+public class Registrar {
+	public static boolean  registerStudent(Student s){
+		System.out.println(s.getName()+"  registered successfully ,"+" Welcome to our University");
+		return true;
+	}
+}
+
+
+
+
+
+package test;
+
+import java.util.Scanner;
+
+public class Validator {
+	public static boolean  validateStudent(Student s){
+		System.out.println(s.getName()+" Applied for University");
+		System.out.println("Register has sent your details to Validator... plz wait");
+		System.out.println("Validator validating your details"+s.getName()+"..... Please wait");
+		if(s.getPreviousMarks() > 60){
+			System.out.println(s.getName()+"  you are successfully registered , welcome to our university");
+		return true;}
+		else 
+			return false;
+	}
+}
